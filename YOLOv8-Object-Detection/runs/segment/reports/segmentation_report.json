@@ -1,0 +1,25 @@
+{
+  "timestamp": "2025-10-25T18:45:36.653202",
+  "segmentation_statistics": {
+    "total_images": 4,
+    "processed_images": 4,
+    "failed_images": 0,
+    "total_segments": 17,
+    "class_distribution": {
+      "bear": 1,
+      "cup": 1,
+      "laptop": 1,
+      "book": 4,
+      "cell phone": 1,
+      "person": 6,
+      "bus": 1,
+      "skateboard": 1,
+      "tie": 1
+    }
+  },
+  "settings": {
+    "confidence_threshold": 0.25,
+    "iou_threshold": 0.7,
+    "image_size": 640
+  }
+}

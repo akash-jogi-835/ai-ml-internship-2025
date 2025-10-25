@@ -1,0 +1,15 @@
+{
+  "timestamp": "2025-10-25T18:45:09.670834",
+  "detection_statistics": {
+    "total_images": 4,
+    "processed_images": 4,
+    "failed_images": 0,
+    "total_detections": 0,
+    "class_distribution": {}
+  },
+  "settings": {
+    "confidence_threshold": 0.25,
+    "iou_threshold": 0.7,
+    "image_size": 640
+  }
+}
