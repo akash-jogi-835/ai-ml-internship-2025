@@ -1,99 +1,92 @@
-# 🧠 Detecting Stress and Fatigue from Facial and Posture Cues
+#  Detecting Stress and Fatigue from Facial and Posture Cues
 
-### **Project Overview**
-This project aims to develop a **computer vision system** capable of detecting **stress** and **fatigue** in individuals using both **facial** and **postural cues** from video input.  
-The system will analyze subtle, semi-voluntary visual indicators — such as **eye blinks, mouth activity, and head movement** — along with **body posture deviations** to assess fatigue or psychosomatic stress levels.
+## Project Overview
+This project focuses on developing a **vision-based system** to detect stress and fatigue using facial cues from video data, with planned extensions to include postural analysis.
 
-This work is inspired by and extends the findings of *Giannakakis et al. (2017)*, who demonstrated that specific facial micro-movements and activity patterns correlate strongly with stress and anxiety states.
-
----
-
-## 📚 Literature Survey
-
-### **1️⃣ Stress and Anxiety Detection Using Facial Cues**
-**Giannakakis, G., Pediaditis, M., Manousos, D., Kazantzaki, E., Chiarugi, F., Simos, P. G., Marias, K., & Tsiknakis, M. (2017).**  
-*Stress and anxiety detection using facial cues from videos.* Biomedical Signal Processing and Control, 31, 89–101.  
-[https://doi.org/10.1016/j.bspc.2016.06.020](https://doi.org/10.1016/j.bspc.2016.06.020)
-
-🔍 **Key Contributions:**
-- Developed a **framework for stress/anxiety detection** using **video-based facial cues**.
-- Focused on **semi-voluntary facial features** (eye aperture, blink rate, gaze instability, mouth movement, head motion) rather than explicit facial expressions.
-- Proposed an **experimental setup** inducing multiple emotional states (neutral, relaxed, stressed/anxious) through internal and external stressors.
-- Applied **machine learning** classifiers to differentiate between stress/anxiety and neutral states with high accuracy.
-- Identified **eye activity, mouth activity, head movements**, and **camera-based photoplethysmography (heart rate)** as discriminative features.
-
-📘 **How It Informs Our Project:**
-This paper establishes that stress-related visual signals exist beyond classical facial expressions — a key insight driving our inclusion of **postural features** (slouching, head tilt, shoulder droop).  
-Our model aims to integrate both **facial micro-cues** and **macro postural cues** to enhance real-world robustness in unconstrained environments.
+The system analyzes subtle, semi-voluntary visual indicators such as eye movement, facial muscle activity, and head motion to infer affective states related to psychosomatic stress and fatigue. This work is grounded in affective computing and healthcare-oriented computer vision.
 
 ---
 
-### **2️⃣ Related Research References**
+## Motivation & Background
+This project is inspired by the work of **Giannakakis et al. (2017)**, which demonstrated that stress and anxiety manifest through measurable facial micro-movements beyond classical facial expressions.
 
-| Study | Focus Area | Key Insight |
-|-------|-------------|-------------|
-| **Li, X., Sun, X., et al. (2020).** *Detecting mental fatigue using facial features and deep learning.* IEEE Access. | Used CNNs to analyze eye and mouth dynamics for fatigue classification. | Deep learning outperforms handcrafted features for emotion-based fatigue detection. |
-| **Kaya, H., et al. (2021).** *A multimodal approach for stress detection using posture and facial expressions.* Pattern Recognition Letters. | Combined facial and skeletal features for stress classification. | Demonstrates complementarity of face + posture data. |
-| **Zhang, Y. et al. (2022).** *Real-time emotion recognition from facial landmarks using CNN and LSTM networks.* Neurocomputing. | Used facial landmarks and sequential models. | Supports temporal modeling for continuous emotion recognition. |
-| **Sharma, N. et al. (2012).** *Objective measures, sensors and computational techniques for stress recognition and classification: a survey.* *Comput. Methods Programs Biomed.* | Reviewed physiological and behavioral stress detection methods. | Highlights multi-sensor fusion (EEG, GSR, facial cues). |
+Building upon this insight, the current work establishes a robust **facial emotion detection engine** that can later be extended to incorporate posture-based and temporal stress indicators for real-world deployment.
 
 ---
 
-## 📊 Dataset Design Plan
+##  Literature Survey
 
-Inspired by **Giannakakis et al. (2017)**, our dataset will incorporate both **facial** and **postural cues** under controlled and natural conditions.
+### Stress and Anxiety Detection Using Facial Cues
+**Giannakakis et al. (2017)**  
+*Stress and anxiety detection using facial cues from videos*  
+Biomedical Signal Processing and Control, 31, 89–101  
 
-### **1️⃣ Data Sources**
-- **Public Datasets (Facial Cues):**
-  - [AffectNet](http://mohammadmahoor.com/affectnet/) – Facial emotion dataset with diverse expressions.
-  - [DFEW](https://dfew-dataset.github.io/) – Dynamic Facial Expressions in the Wild.
-  - [FER2013](https://www.kaggle.com/datasets/deadskull7/fer2013) – Basic emotion dataset (can fine-tune for fatigue-like states).
+**Key Insights:**
+- Semi-voluntary facial cues (eye activity, mouth movement, head motion) are strong stress indicators  
+- Facial expressions alone are insufficient for real-world stress detection  
+- Machine learning models can reliably differentiate stress-related states  
 
-- **Custom Dataset (Posture + Fatigue Simulation):**
-  - Record videos of participants simulating **relaxed**, **alert**, and **fatigued/stressed** states.
-  - Capture **upper-body frames** focusing on shoulders, head, and posture tilt.
-  - Annotate with class labels: `"Neutral"`, `"Stressed"`, `"Fatigued"`.
-
-### **2️⃣ Experimental Design**
-| Condition | Stimulus | Expected Behavior | Captured Features |
-|------------|-----------|-------------------|-------------------|
-| Neutral | Calm environment | Normal posture, minimal blinking | Baseline |
-| Stressed | Task under time pressure | Faster blinking, furrowed brow, tensed shoulders | Eye aperture, head movement |
-| Fatigued | Prolonged sitting/late hours | Slouching, slow eye movement, yawning | Posture angle, mouth activity |
-
-### **3️⃣ Feature Focus**
-- **Facial Cues:** Eye aperture, blink rate, mouth openness, head rotation.
-- **Postural Cues:** Shoulder slouch angle, head tilt, back curvature.
-- **Derived Metrics:** Eye aspect ratio (EAR), mouth aspect ratio (MAR), posture deviation (Pdev).
+These findings motivate the integration of both facial and postural cues in later stages of this project.
 
 ---
 
-## 🧠 Methodology (Proposed)
-
-1. **Face & Pose Detection** – YOLOv8 or MediaPipe.  
-2. **Feature Extraction** – EAR, MAR, pose keypoints.  
-3. **Model Training (Transfer Learning)** – Fine-tune ResNet50 / EfficientNet for classification.  
-4. **Temporal Modeling (Optional)** – Add LSTM layer for time-series analysis of stress progression.  
-5. **Evaluation** – Accuracy, Precision, F1-score, and confusion matrix.  
-
----
-
-## 📘 Expected Outcomes
-- Dataset with annotated facial and posture stress cues.
-- Model capable of detecting **fatigue and stress levels in real time**.
-- Improved robustness through combined micro (face) and macro (posture) feature analysis.
-- Strong theoretical grounding in prior literature (esp. Giannakakis et al., 2017).
+### Related Research
+| Study | Focus | Key Insight |
+|-----|-----|-----|
+| Li et al. (2020) | Facial fatigue detection | CNNs outperform handcrafted features |
+| Kaya et al. (2021) | Face + posture | Multimodal cues improve robustness |
+| Zhang et al. (2022) | Temporal modeling | LSTM improves emotion continuity |
+| Sharma et al. (2012) | Stress surveys | Multisensor fusion is critical |
 
 ---
 
-## 🔖 References
+##  Dataset Used
+**AffectNet (YOLO Format)**  
+- ~25k images  
+- 8 facial emotion classes  
+- YOLO-formatted bounding box annotations  
 
-1. Giannakakis, G., Pediaditis, M., Manousos, D., Kazantzaki, E., Chiarugi, F., Simos, P. G., Marias, K., & Tsiknakis, M. (2017). *Stress and anxiety detection using facial cues from videos.* Biomedical Signal Processing and Control, 31, 89–101. [https://doi.org/10.1016/j.bspc.2016.06.020](https://doi.org/10.1016/j.bspc.2016.06.020)
+Dataset split:
+- Train: 17,101 images  
+- Validation: 5,406 images  
+- Test: 2,755 images  
 
-2. Li, X., Sun, X., et al. (2020). *Detecting mental fatigue using facial features and deep learning.* IEEE Access.
+---
 
-3. Kaya, H., et al. (2021). *A multimodal approach for stress detection using posture and facial expressions.* Pattern Recognition Letters.
+##  Methodology (Implemented Phase)
+1. Dataset verification and cleaning  
+2. Facial detection and emotion classification using YOLOv8  
+3. Transfer learning with pretrained weights  
+4. Automated evaluation using YOLO metrics  
 
-4. Sharma, N., Gedeon, T., & Aldrich, C. (2012). *Objective measures, sensors and computational techniques for stress recognition and classification: a survey.* *Computer Methods and Programs in Biomedicine, 108*(3), 1287–1301.
+---
 
-5. Zhang, Y. et al. (2022). *Real-time emotion recognition from facial landmarks using CNN and LSTM networks.* Neurocomputing.
+##  Training & Results
+- Model: YOLOv8n  
+- Epochs: 30  
+- Image size: 640 × 640  
+- GPU: Tesla T4  
+
+**Performance Highlights:**
+- Steady reduction in training and validation loss  
+- Validation mAP@0.5 ≈ **0.70+**  
+- Robust precision and recall across emotion classes  
+
+YOLO automatically generated confusion matrices, F1 curves, PR curves, and per-class metrics, confirming reliable convergence.
+
+---
+
+##  Future Work
+- Integrate posture-based cues (shoulder slouch, head tilt)  
+- Temporal modeling using LSTM for continuous stress estimation  
+- Stress-level regression (low / medium / high)  
+- Real-time deployment using Streamlit  
+
+---
+
+##  References
+Giannakakis et al. (2017).  
+Li et al. (2020).  
+Kaya et al. (2021).  
+Sharma et al. (2012).  
+Zhang et al. (2022).
